@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod # type of object we want to create
+metadata: # config options for the object we are about to create
+  name: posts # once the Pod is created, give it a name of 'posts'
+spec: # attributes we want to apply to the object we're about to create
+  containers:
+    - name: posts # container name
+      image: nirgluzman/posts:0.0.1 # image to use
