@@ -1,0 +1,28 @@
+@url-posts = http://localhost:4000
+@url-comments = http://localhost:4100
+@url-query = http://localhost:4200
+
+###
+GET {{url-posts}}/posts
+
+###
+POST {{url-posts}}/posts
+Content-Type: application/json
+
+{
+  "title": "First post"
+}
+
+###
+GET {{url-comments}}/posts/123/comments
+
+###
+POST {{url-comments}}/posts/123/comments
+Content-Type: application/json
+
+{
+  "content": "I am a comment"
+}
+
+###
+GET {{url-query}}/posts
