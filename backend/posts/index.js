@@ -26,7 +26,10 @@ app.post('/posts', async (req, res) => {
 	posts[id] = { id, title };
 
 	// emit an event to event bus
-	await axios.post('http://localhost:5000/events', { type: 'PostCreated', data: { id, title } });
+	await axios.post('http://event-bus-srv:5000/events', {
+		type: 'PostCreated',
+		data: { id, title }
+	});
 
 	res.status(201).send(posts[id]);
 });
@@ -39,4 +42,4 @@ app.post('/events', (req, res) => {
 	res.send({ status: 'OK' }); // send an ack to the event bus
 });
 
-app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Posts is up, listening on ${PORT}`));
