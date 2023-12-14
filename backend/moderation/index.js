@@ -21,7 +21,7 @@ app.post('/events', async (req, res) => {
 		await new Promise((resolve, reject) => setTimeout(() => resolve(), 2000));
 
 		// once comment is moderated, the service sends an event back to the event bus
-		await axios.post('http://localhost:5000/events', {
+		await axios.post('http://event-bus-srv:5000/events', {
 			type: 'CommentModerated',
 			data: {
 				id: data.id,
@@ -35,4 +35,4 @@ app.post('/events', async (req, res) => {
 	res.send({ status: 'OK' });
 });
 
-app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Moderation is up, listening on ${PORT}`));

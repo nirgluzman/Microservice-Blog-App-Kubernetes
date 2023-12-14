@@ -55,12 +55,12 @@ app.post('/events', (req, res) => {
 });
 
 app.listen(PORT, async () => {
-	console.log(`listening on http://localhost:${PORT}`);
+	console.log(`Query is up, listening on ${PORT}`);
 
 	try {
 		// once the query service it up, it should fetch all historical events from event-bus and store this info in 'posts' variable
-		console.log('Query service is up, fetching events...');
-		const res = await axios.get('http://localhost:5000/events');
+		console.log('fetching events...');
+		const res = await axios.get('http://event-bus-srv:5000/events');
 
 		for (let event of res.data) {
 			console.log('Processing event:', event.type);

@@ -34,7 +34,7 @@ app.post('/posts/:id/comments', async (req, res) => {
 	commentsByPostId[req.params.id] = comments;
 
 	// emit an event to event bus
-	await axios.post('http://localhost:5000/events', {
+	await axios.post('http://event-bus-srv:5000/events', {
 		type: 'CommentCreated',
 		data: { id: commentId, content, postId, status: 'pending' }
 	});
@@ -54,7 +54,7 @@ app.post('/events', async (req, res) => {
 		comment.status = status;
 
 		// emit an event to event bus
-		await axios.post('http://localhost:5000/events', {
+		await axios.post('http://event-bus-srv:5000/events', {
 			type: 'CommentUpdated',
 			data: { id, content, postId, status }
 		});
@@ -63,4 +63,4 @@ app.post('/events', async (req, res) => {
 	res.send({ status: 'OK' }); // send an ack to the event bus
 });
 
-app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Comments is up, listening on ${PORT}`));

@@ -25,10 +25,10 @@ app.post('/events', async (req, res) => {
 	// Promise.all() will reject as soon as one of the functions passed in the array rejects.
 	// Promise.allSettled() will never reject - instead it will wait for all functions passed in the array to either resolve or reject.
 	const serviceStatus = await Promise.allSettled([
-		axios.post('http://posts-clusterip-srv:4000/events', event) // send the event to 'posts' service
-		// axios.post('http://localhost:4100/events', event), // send the event to 'comments' service
-		// axios.post('http://localhost:4200/events', event), // send the event to 'query' service
-		// axios.post('http://localhost:4300/events', event) // send the event to 'moderation' service
+		axios.post('http://posts-srv:4000/events', event), // send the event to 'posts' service
+		axios.post('http://comments-srv:4100/events', event), // send the event to 'comments' service
+		axios.post('http://query-srv:4200/events', event), // send the event to 'query' service
+		axios.post('http://moderation-srv:4300/events', event) // send the event to 'moderation' service
 	]);
 
 	// log the error message if any of the services fail to process the event
