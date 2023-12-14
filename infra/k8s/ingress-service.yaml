@@ -7,18 +7,41 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-srv
-  # # annotations:
-  # kubernetes.io/ingress.class: nginx -> deprecated, use 'spec.ingressClassName' instead
+  annotations:
+    # kubernetes.io/ingress.class: nginx -> deprecated, use 'spec.ingressClassName' instead
+    nginx.ingress.kubernetes.io/use-regex: 'true' # enable regexp for path matches
+
 spec:
   ingressClassName: nginx
-  rules: # routing rules
+  rules: # routing rules, path based !
     - host: posts.com
       http:
-        paths:
-          - path: /posts
+        paths: # paths should be listed from the most specific ones !!
+          - path: /posts/create
             pathType: Prefix # https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types
             backend:
               service:
                 name: posts-srv
                 port:
                   number: 4000
+          - path: /posts
+            pathType: Prefix
+            backend:
+              service:
+                name: query-srv
+                port:
+                  number: 4200
+          - path: /posts/?(.*)/comments
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: comments-srv
+                port:
+                  number: 4100
+          - path: /?(.*) # should be the last path listed ! we use regex to support SPA routing
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: client-srv
+                port:
+                  number: 3000
