@@ -10,7 +10,7 @@ const PostList = () => {
 	useEffect(() => {
 		const fetchPosts = async () => {
 			try {
-				const res = await axios.get('http://localhost:4200/posts'); // GET /posts from 'query' service
+				const res = await axios.get('http://posts.com/posts'); // GET /posts from 'query' service
 				setPosts(res.data);
 			} catch (error) {
 				console.log('Query service is down');
