@@ -19,7 +19,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: posts-clusterip-srv
+  name: posts-srv
 spec:
   type: ClusterIP
   selector:
@@ -27,5 +27,5 @@ spec:
   ports:
     - name: posts
       protocol: TCP
-      port: 4000
-      targetPort: 4000
+      port: 4000 # HOST_PORT
+      targetPort: 4000 # CONTAINER_PORT - application needs to be listening for network requests on this port
