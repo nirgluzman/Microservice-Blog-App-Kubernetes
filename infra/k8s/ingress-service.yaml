@@ -1,0 +1,24 @@
+# single load balancer powered by ingress-nginx will route traffic to different HTTP backend services
+# https://kubernetes.github.io/ingress-nginx/user-guide/basic-usage/
+# https://kubernetes.io/docs/concepts/services-networking/ingress/
+# https://stackoverflow.com/questions/72224230/error-resource-mapping-not-found-make-sure-crds-are-installed-first
+#
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  # # annotations:
+  # kubernetes.io/ingress.class: nginx -> deprecated, use 'spec.ingressClassName' instead
+spec:
+  ingressClassName: nginx
+  rules: # routing rules
+    - host: posts.com
+      http:
+        paths:
+          - path: /posts
+            pathType: Prefix # https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types
+            backend:
+              service:
+                name: posts-srv
+                port:
+                  number: 4000
