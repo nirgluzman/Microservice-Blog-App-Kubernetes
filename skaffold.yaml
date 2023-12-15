@@ -1,0 +1,63 @@
+# skaffold.yaml
+# https://skaffold.dev/docs/references/yaml/
+#
+# Note that, in this skaffold config it looks for an image in the cache or build the image locally
+# rather than pull it from Dockerhub.
+#
+apiVersion: skaffold/v4beta8
+kind: Config
+manifests:
+  rawYaml:
+    - ./infra/k8s/*.yaml # Kubernetes manifests
+build: # describes how images are built
+  local:
+    push: false
+  artifacts: # the images you're going to be building
+    - image: nirgluzman/client
+      context: client # directory containing the artifact's sources
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual: # define a list of files or directories to be copied from the local filesystem to the Kubernetes pod during the build phase
+          - src: 'src/**/*.js' # a glob pattern to match all JavaScript files recursively within the src directory, including those in subdirectories
+            dest: . # destination path in the container where the files should be synced to
+    - image: nirgluzman/posts
+      context: backend/posts # directory containing the artifact's sources
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: nirgluzman/comments
+      context: backend/comments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: nirgluzman/query
+      context: backend/query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: nirgluzman/moderation
+      context: backend/moderation
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .
+    - image: nirgluzman/event-bus
+      context: backend/event-bus
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .

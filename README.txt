@@ -41,6 +41,11 @@ https://github.com/kubernetes/ingress-nginx
 https://kubernetes.github.io/ingress-nginx/deploy/
 https://kubernetes.github.io/ingress-nginx/deploy/#quick-start
 
+Nginx vs. Ingress-Nginx:
+https://www.udemy.com/course/docker-kubernetes-the-practical-guide/learn/lecture/22627951#questions/20986912
+https://medium.com/@hagaibarel/kubernetes-and-elbs-the-hard-way-c59a15779caf
+
+
 *) Update host file in Windows -> posts.com
 C:\Windows\System32\drivers\etc\hosts
 
@@ -48,3 +53,17 @@ C:\Windows\System32\drivers\etc\hosts
 https://kubernetes.github.io/ingress-nginx/user-guide/basic-usage/
 https://kubernetes.io/docs/concepts/services-networking/ingress/
 https://stackoverflow.com/questions/72224230/error-resource-mapping-not-found-make-sure-crds-are-installed-first
+
+
+------------------------
+Skaffold
+------------------------
+https://skaffold.dev/
+Automates many tasks in a Kubernetes dev environment.
+Making it easy to:
+- update code in running Pods
+- create/delete all objects tied to a project at once
+
+Skaffold watches an application's source files.
+When it detects changes, it rebuilds the images (or sync files to your running containers), pushes any new images,
+tests built images, and redeploys the application to the cluster.
