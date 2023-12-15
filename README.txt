@@ -59,6 +59,14 @@ https://stackoverflow.com/questions/72224230/error-resource-mapping-not-found-ma
 Skaffold
 ------------------------
 https://skaffold.dev/
+
+# enable continuous local development on an application:
+skaffold dev  -> https://skaffold.dev/docs/workflows/dev/
+
+# Kubernetes resource cleanup:
+skaffold delete  -> https://skaffold.dev/docs/cleanup/
+
+
 Automates many tasks in a Kubernetes dev environment.
 Making it easy to:
 - update code in running Pods
@@ -68,4 +76,5 @@ Skaffold watches an application's source files.
 When it detects changes, it rebuilds the images (or sync files to your running containers), pushes any new images,
 tests built images, and redeploys the application to the cluster.
 
-** It is important that all services should be running in DEV mode (e.g. nodemon), so that changes can be incorporated into the code while executing.
+** It is important that all services should be running in DEV mode (e.g. nodemon, create-react-app), so that changes can be incorporated into the code while executing (auto restart).
+** Sometime we've challenges to detect files changes in containers.
