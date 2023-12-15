@@ -67,3 +67,5 @@ Making it easy to:
 Skaffold watches an application's source files.
 When it detects changes, it rebuilds the images (or sync files to your running containers), pushes any new images,
 tests built images, and redeploys the application to the cluster.
+
+** It is important that all services should be running in DEV mode (e.g. nodemon), so that changes can be incorporated into the code while executing.
